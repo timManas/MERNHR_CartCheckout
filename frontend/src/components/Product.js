@@ -5,9 +5,12 @@ import { Card } from 'react-bootstrap'
 
 const Product = ({ product }) => {
   return (
-    <Card className='my-3 p-3 rounded text-white bg-primary'>
+    <Card
+      className='my-2 text-white bg-primary'
+      style={{ padding: 0, margin: 0 }}
+    >
       <Link to={`/product/${product._id}`}>
-        <Card.Img src={product.image} variant='top' style={{ width: '100%' }} />
+        <Card.Img src={product.image} variant='top' />
       </Link>
 
       <Card.Body>

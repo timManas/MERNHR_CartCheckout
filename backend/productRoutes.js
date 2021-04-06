@@ -10,4 +10,16 @@ router.route('/').get(
   })
 )
 
+router.route('/:id').get(
+  asyncHandler(async (req, res) => {
+    const product = await Product.findById({ _id: req.params.id })
+    if (product) {
+      res.json(product)
+    } else {
+      res.send(400)
+      throw new Error('Product not found')
+    }
+  })
+)
+
 export default router
