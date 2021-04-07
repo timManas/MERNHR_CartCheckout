@@ -1,27 +1,10 @@
 import express from 'express'
-import User from './userModel.js'
-import asyncHandler from 'express-async-handler'
-import generateToken from './generateToken.js'
+import { authUser, getUserProfile } from './userController.js'
+import { protect } from './authMiddleware.js'
 
 const router = express.Router()
 
-router.route('/login').post(
-  asyncHandler(async (req, res) => {
-    const { email, password } = req.body
-    const user = await User.findOne({ email })
-    if (user && (await user.matchPassword(password))) {
-      res.json({
-        _id: user._id,
-        name: user.name,
-        email: user.password,
-        isAdmin: user.isAdmin,
-        token: generateToken(user._id),
-      })
-    } else {
-      res.status(401)
-      res.json({ error: 'Invalid Email or Password' })
-    }
-  })
-)
+router.route('/login').post(authUser)
+router.route('/profile').get(protect, getUserProfile)
 
 export default router
