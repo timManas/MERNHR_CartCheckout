@@ -11,9 +11,9 @@ import {
 export const userLoginReducer = (state = { userInfo: {} }, action) => {
   switch (action.type) {
     case USER_LOGIN_REQUEST:
-      return { userinfo: {} }
+      return state
     case USER_LOGIN_SUCCESS:
-      return { userinfo: action.payload }
+      return { userInfo: action.payload }
     case USER_LOGIN_FAIL:
       return { error: action.payload }
     case USER_LOGOUT:

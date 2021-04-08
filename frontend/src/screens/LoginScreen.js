@@ -12,6 +12,7 @@ const LoginScreen = ({ location, history }) => {
   const dispatch = useDispatch()
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
+  console.log('UserInfo: ' + JSON.stringify(userInfo))
 
   const redirect = location.search ? location.search.split('=')[1] : '/'
 

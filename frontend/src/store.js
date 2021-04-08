@@ -20,7 +20,9 @@ const userInfoFromStorage = localStorage.getItem('userInfo')
   : null
 
 // This is where we get our cartItes, tokens, userInfo
-const initialState = { userLogin: { userInfo: userInfoFromStorage } }
+const initialState = {
+  userLogin: { userInfo: userInfoFromStorage },
+}
 const middleware = [thunk]
 
 const store = createStore(
