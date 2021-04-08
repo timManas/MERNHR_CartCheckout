@@ -6,13 +6,21 @@ import {
   productDetailsReducer,
 } from './reducers/productReducers'
 
+import { userLoginReducer } from './reducers/userReducers'
+
 const reducer = combineReducers({
   productList: productListReducer,
   productDetails: productDetailsReducer,
+  userLogin: userLoginReducer,
 })
 
+// Fethc user info from localStorage if ANY
+const userInfoFromStorage = localStorage.getItem('userInfo')
+  ? JSON.parse(localStorage.getItem('userInfo'))
+  : null
+
 // This is where we get our cartItes, tokens, userInfo
-const initialState = {}
+const initialState = { userLogin: { userInfo: userInfoFromStorage } }
 const middleware = [thunk]
 
 const store = createStore(
