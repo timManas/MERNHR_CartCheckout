@@ -1,6 +1,7 @@
 import asyncHandler from 'express-async-handler'
 import User from './userModel.js'
 import generateToken from './generateToken.js'
+import e from 'express'
 
 export const authUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body
@@ -31,5 +32,25 @@ export const getUserProfile = asyncHandler(async (req, res) => {
   } else {
     res.status(401)
     throw new Error('Not Authorized, no token')
+  }
+})
+
+export const registerUser = asyncHandler(async (req, res) => {
+  const { name, email, password } = req.body
+
+  const userExist = await User.findOne({ email })
+  if (userExist) {
+    res.status(400)
+    res.send('User already Exists')
+    throw new Error('User already exists')
+  }
+
+  const user = await User.create({ name, email, password })
+  if (user) {
+    res.status(200)
+    res.json({ name, email, password })
+  } else {
+    res.status(400)
+    throw new Error('Unable to create User')
   }
 })
