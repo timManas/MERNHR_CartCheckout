@@ -9,12 +9,27 @@ import {
 import { userLoginReducer, userRegisterReducer } from './reducers/userReducers'
 import { cartReducer } from './reducers/cartReducers'
 
+import {
+  orderCreateReducer,
+  orderDetailsReducer,
+  orderPayReducer,
+  orderDeliverReducer,
+  orderListMyReducer,
+  orderListReducer,
+} from './reducers/orderReducers'
+
 const reducer = combineReducers({
   productList: productListReducer,
   productDetails: productDetailsReducer,
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
   cart: cartReducer,
+  orderCreate: orderCreateReducer,
+  orderDetails: orderDetailsReducer,
+  orderPay: orderPayReducer,
+  orderDeliver: orderDeliverReducer,
+  orderListMy: orderListMyReducer,
+  orderList: orderListReducer,
 })
 
 // Fetch items from localStore if ANY
@@ -34,6 +49,10 @@ const shippingAddressFromStorage = localStorage.getItem('shippingAddress')
 
 // This is where we get our cartItes, tokens, userInfo
 const initialState = {
+  cart: {
+    cartItems: cartItemsFromStorage,
+    shippingAddress: shippingAddressFromStorage,
+  },
   userLogin: { userInfo: userInfoFromStorage },
 }
 const middleware = [thunk]
