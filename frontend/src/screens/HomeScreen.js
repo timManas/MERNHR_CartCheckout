@@ -9,7 +9,6 @@ const HomeScreen = () => {
   const dispatch = useDispatch()
   const productsList = useSelector((state) => state.productList)
   const { products } = productsList
-  console.log('Axios Produts: ' + JSON.stringify(productsList))
 
   useEffect(() => {
     dispatch(listProducts())

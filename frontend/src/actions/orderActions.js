@@ -67,6 +67,7 @@ export const getOrderDetails = (id) => async (dispatch, getState) => {
       type: ORDER_DETAILS_REQUEST,
     })
 
+    console.log('Here')
     // Destructure twice to get the userInfo
     const {
       userLogin: { userInfo },
@@ -81,6 +82,7 @@ export const getOrderDetails = (id) => async (dispatch, getState) => {
 
     // Send GET request of user by name/username/password
     const { data } = await axios.get(`/api/orders/${id}`, config)
+    console.log('OrdersId: ' + JSON.stringify(data))
 
     // Dispatch and send to Reducer
     dispatch({

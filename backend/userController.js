@@ -1,12 +1,17 @@
 import asyncHandler from 'express-async-handler'
 import User from './userModel.js'
 import generateToken from './generateToken.js'
-import e from 'express'
 
 export const authUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body
+  console.log(`EmailPassowrd: ${email}    ${password}`)
   const user = await User.findOne({ email })
+  console.log(`UserExists: ${JSON.stringify(user)}}`)
+  console.log(
+    `PasswordMatch: ${JSON.stringify(await user.matchPassword(password))}}`
+  )
   if (user && (await user.matchPassword(password))) {
+    console.log('Authenticated')
     res.json({
       _id: user._id,
       name: user.name,
@@ -15,6 +20,7 @@ export const authUser = asyncHandler(async (req, res) => {
       token: generateToken(user._id),
     })
   } else {
+    console.log('NOT Authenticated')
     res.status(401)
     res.json({ error: 'User not found' })
   }
